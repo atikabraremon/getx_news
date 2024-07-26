@@ -3,7 +3,6 @@ class CategoryList {
     "Business",
     "General",
     "Health",
-    // "Entertainment",
     "Sports"
   ];
 }

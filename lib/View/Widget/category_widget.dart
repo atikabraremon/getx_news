@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getx_news/View/Widget/list_item.dart';
 import 'package:getx_news/shared/constant.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -36,7 +35,7 @@ class _CategoryWidgetState extends State<CategoryWidget>
               controller: controller,
               children: CategoryList.categoryItem
                   .map(
-                    (e) => const ListItem(),
+                    (e) => const Text(""),
                   )
                   .toList()),
         )

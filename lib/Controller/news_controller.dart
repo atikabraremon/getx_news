@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:getx_news/Controller/api_helper.dart';
+
+import '../Model/news_model.dart';
 
 class NewsController extends GetxController {
   final box = GetStorage();
@@ -22,4 +25,23 @@ class NewsController extends GetxController {
     index = currentIndex;
     update();
   }
+
+  NewsHelper newsHelper = NewsHelper();
+
+  List<NewsModel> newsList = [];
+
+
+  void getHeadLines() async {
+    newsList = await newsHelper.getHeadLine();
+    update();
+  }
+
+  @override
+  void onInit() {
+    getHeadLines();
+    super.onInit();
+  }
+
+
+
 }
