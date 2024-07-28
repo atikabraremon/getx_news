@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx_news/Controller/news_controller.dart';
+import 'package:getx_news/Model/news_model.dart';
+import 'package:getx_news/View/Widget/list_item.dart';
 import 'package:getx_news/shared/constant.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -11,6 +15,7 @@ class CategoryWidget extends StatefulWidget {
 class _CategoryWidgetState extends State<CategoryWidget>
     with SingleTickerProviderStateMixin {
   late TabController? controller;
+  final newsController = Get.put(NewsController());
 
   @override
   void initState() {
@@ -27,29 +32,28 @@ class _CategoryWidgetState extends State<CategoryWidget>
           isScrollable: true,
           controller: controller,
           tabs: CategoryList.categoryItem.map((e) {
-            return Text(e);
+            return Text(e.toUpperCase());
           }).toList(),
         ),
         Expanded(
           child: TabBarView(
               controller: controller,
-              children: CategoryList.categoryItem
-                  .map(
-                    (e) => const Text("afer"),
-                  )
-                  .toList()),
+              children: CategoryList.categoryItem.map(
+                (e) {
+                  return FutureBuilder(
+                    future: newsController.getCategory(category: e),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListItem(list: snapshot.data as List<NewsModel>);
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  );
+                },
+              ).toList()),
         )
       ],
     );
   }
 }
-
-// TabBar(
-// isScrollable: true,
-// controller: controller,
-// tabs: CategoryList.categoryItems.map((e) {
-// return Container(
-// child: Text(e),
-// );
-// }).toList(),
-// ),

@@ -34,6 +34,13 @@ class NewsController extends GetxController {
     update();
   }
 
+  List<NewsModel> newsCategory = [];
+
+  Future<List<NewsModel>> getCategory({required String category}) async {
+    newsCategory = await newsHelper.getNewsCategory(category: category);
+    return newsCategory;
+  }
+
   @override
   void onInit() {
     getHeadlines();

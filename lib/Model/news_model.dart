@@ -23,14 +23,14 @@ class NewsModel {
     final source = NewsSource.fromMap(json["source"]);
 
     return NewsModel(
-      author: json["author"] ?? "null",
-      title: json["title"],
-      description: json["description"],
-      url: json["url"] ?? "",
+      author: json["author"] ?? "Author null",
+      title: json["title"] ?? "null Title",
+      description: json["description"] ?? "null Description",
+      url: json["url"] ?? "null url",
       urlToImage: json["urlToImage"] ??
-          "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+          "https://img.freepik.com/free-vector/flat-design-image-upload-concept_23-2148296955.jpg?t=st=1722154651~exp=1722158251~hmac=7f66e344bfaa96614d928d1f7d383663dac0840f3db7f01857ed16c6f6d415f6&w=740",
       publishedAt: DateTime.parse(json["publishedAt"]),
-      content: json["content"],
+      content: json["content"] ?? 'null Content',
       source: source,
     );
   }
@@ -46,7 +46,7 @@ class NewsSource {
   });
 
   factory NewsSource.fromMap(Map<String, dynamic> json) => NewsSource(
-    id: json["id"] ?? "null",
-    name: json["name"],
+    id: json["id"] ?? "null ID",
+    name: json["name"] ?? "null Name",
   );
 }
