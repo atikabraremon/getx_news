@@ -35,7 +35,7 @@ class _CategoryWidgetState extends State<CategoryWidget>
               controller: controller,
               children: CategoryList.categoryItem
                   .map(
-                    (e) => const Text(""),
+                    (e) => const Text("afer"),
                   )
                   .toList()),
         )

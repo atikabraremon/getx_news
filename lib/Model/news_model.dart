@@ -1,15 +1,14 @@
 class NewsModel {
-  String? name;
-  String? author;
-  String? title;
-  String? description;
-  String? url;
-  String? urlToImage;
-  String? publishedAt;
-  String? content;
+  final String author;
+  final String title;
+  final String description;
+  final String url;
+  final String urlToImage;
+  final DateTime publishedAt;
+  final String content;
+  final NewsSource source;
 
   NewsModel({
-    required this.name,
     required this.author,
     required this.title,
     required this.description,
@@ -17,17 +16,37 @@ class NewsModel {
     required this.urlToImage,
     required this.publishedAt,
     required this.content,
+    required this.source,
   });
 
-  factory NewsModel.fromJson(Map<String, dynamic> json) => NewsModel(
-        name: json['source']["name"] ?? "",
-        author: json["author"] ?? "",
-        title: json['title'] ?? "",
-        description: json['description'] ?? "",
-        url: json["url"] ?? "",
-        urlToImage: json['urlToImage'] ??
-            "https://img.freepik.com/free-vector/couple-drawing-conversation-cartoon-style-illustration_1150-37533.jpg?t=st=1721889439~exp=1721893039~hmac=6b019d3cc472a495973fb96bc2d0848b8b4bd9ec55852b6850c8128720063e92&w=740",
-        publishedAt: json["publishedAt"] ?? " ",
-        content: json["content"] ?? " ",
-      );
+  factory NewsModel.fromMap(Map<String, dynamic> json) {
+    final source = NewsSource.fromMap(json["source"]);
+
+    return NewsModel(
+      author: json["author"] ?? "null",
+      title: json["title"],
+      description: json["description"],
+      url: json["url"] ?? "",
+      urlToImage: json["urlToImage"] ??
+          "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      publishedAt: DateTime.parse(json["publishedAt"]),
+      content: json["content"],
+      source: source,
+    );
+  }
+}
+
+class NewsSource {
+  final String id;
+  final String name;
+
+  NewsSource({
+    required this.id,
+    required this.name,
+  });
+
+  factory NewsSource.fromMap(Map<String, dynamic> json) => NewsSource(
+    id: json["id"] ?? "null",
+    name: json["name"],
+  );
 }

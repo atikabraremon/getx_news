@@ -11,7 +11,7 @@ class ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return list.isNotEmpty
         ? ListView.builder(
-            itemCount: list.length - 1,
+            itemCount: list.length,
             itemBuilder: (context, index) => Container(
               margin: const EdgeInsets.all(10),
               height: MediaQuery.of(context).size.height * 0.3,

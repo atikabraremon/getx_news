@@ -10,7 +10,7 @@ class HomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder(
       init: NewsController(),
-      builder: (controller) => ListItem(list: controller.newsList,),
+      builder: (controller) => ListItem(list: controller.newsData,),
     );
   }
 }
